@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SERIAL NUMBER GENERATOR</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card" style="margin-top:20px">
+            <div class="card-body">
+              <label for="">Serial Number</label>
+              <input type="text" id="sn" class="form-control">
+              <br>
+              <button id="crack" class="btn btn-primary btn-block">Crack</button>
+              <br>
+              <br>
+              <div id="res">
+                Result :
+              </div>
+            </div>
+          </div>
+    </div>
+
+	<script>
+		function enkno1(DATA_ASLI1) {
+			let XX = '0123456789';
+			let YY = '6541965872';
+			let ZZ = DATA_ASLI1.trim();
+			let WW = ZZ.length;
+			let AA = '';
+			let CC = '';
+			let DD = '';
+			let I, BB;
+			for (I = 0; I < WW; I++) {
+				AA = ZZ[I];
+				BB = XX.indexOf(AA);
+				CC = YY[BB];
+				DD += CC;
+			}
+			return DD;
+		}
+
+		function dekno1(DATA_ASLI1) {
+			let XX = '6541965872';
+			let YY = '0123456789';
+			let ZZ = DATA_ASLI1.trim();
+			let WW = ZZ.length;
+			let AA = '';
+			let CC = '';
+			let DD = '';
+			let I, BB;
+			for (I = 0; I < WW; I++) {
+				AA = ZZ[I];
+				BB = XX.indexOf(AA);
+				CC = YY[BB];
+				DD += CC;
+			}
+			return DD;
+		}
+
+		function enkno2(DATA_ASLI2) {
+			let XX = '0123456789';
+			let YY = '1478632598';
+			let ZZ = DATA_ASLI2.trim();
+			let WW = ZZ.length;
+			let AA = '';
+			let CC = '';
+			let DD = '';
+			let I, BB;
+			for (I = 0; I < WW; I++) {
+				AA = ZZ[I];
+				BB = XX.indexOf(AA);
+				CC = YY[BB];
+				DD += CC;
+			}
+			return DD;
+		}
+
+		function dekno2(DATA_ASLI2) {
+			let XX = '1478632598';
+			let YY = '0123456789';
+			let ZZ = DATA_ASLI2.trim();
+			let WW = ZZ.length;
+			let AA = '';
+			let CC = '';
+			let DD = '';
+			let I, BB;
+			for (I = 0; I < WW; I++) {
+				AA = ZZ[I];
+				BB = XX.indexOf(AA);
+				CC = YY[BB];
+				DD += CC;
+			}
+			return DD;
+		}
+
+		function enkno3(dataAsli3) {
+			let xx = '0123456789';
+			let yy = '3654780124';
+			let zz = dataAsli3.trim();
+			let ww = zz.length;
+			let aa, bb, cc, dd = '';
+
+			for (let i = 0; i < ww; i++) {
+				aa = zz.charAt(i);
+				bb = xx.indexOf(aa);
+				cc = yy.charAt(bb);
+				dd += cc;
+			}
+
+			return dd;
+		}
+
+		function dekno3(dataAsli3) {
+			let xx = '3654780124';
+			let yy = '0123456789';
+			let zz = dataAsli3.trim();
+			let ww = zz.length;
+			let aa, bb, cc, dd = '';
+
+			for (let i = 0; i < ww; i++) {
+				aa = zz.charAt(i);
+				bb = xx.indexOf(aa);
+				cc = yy.charAt(bb);
+				dd += cc;
+			}
+
+			return dd;
+		}
+
+		function enkno4(dataAsli4) {
+			let xx = '0123456789';
+			let yy = '8796321067';
+			let zz = dataAsli4.trim();
+			let ww = zz.length;
+			let aa, bb, cc, dd = '';
+
+			for (let i = 0; i < ww; i++) {
+				aa = zz.charAt(i);
+				bb = xx.indexOf(aa);
+				cc = yy.charAt(bb);
+				dd += cc;
+			}
+
+			return dd;
+		}
+
+		function dekno4(dataAsli4) {
+			let xx = '8796321067';
+			let yy = '0123456789';
+			let zz = dataAsli4.trim();
+			let ww = zz.length;
+			let aa, bb, cc, dd = '';
+
+			for (let i = 0; i < ww; i++) {
+				aa = zz.charAt(i);
+				bb = xx.indexOf(aa);
+				cc = yy.charAt(bb);
+				dd += cc;
+			}
+
+			return dd;
+		}
+
+        function decodeSerialNumber(randreg){
+            randreg = randreg.replaceAll("-", "")
+            const xnm1 = randreg.substr(0, 1);
+            const xnm2 = randreg.substr(1, 1);
+            const xnm3 = randreg.substr(2, 1);
+            const xnm4 = randreg.substr(3, 1);
+
+            const xkota1 = randreg.substr(4, 1);
+            const xkota2 = randreg.substr(5, 1);
+            const xkota3 = randreg.substr(6, 1);
+            const xkota4 = randreg.substr(7, 1);
+
+            const xdriv11 = randreg.substr(8, 1);
+            const xdriv12 = randreg.substr(9, 1);
+            const xdriv13 = randreg.substr(10, 1);
+            const xdriv14 = randreg.substr(11, 1);
+
+            const xdriv21 = randreg.substr(12, 1);
+            const xdriv22 = randreg.substr(13, 1);
+            const xdriv23 = randreg.substr(14, 1);
+            const xdriv24 = randreg.substr(15, 1);
+
+            const xregister = enkno1(xnm1) + enkno2(xnm2) + enkno3(xnm3) + enkno4(xnm4) + '-' +
+                enkno4(xkota1) + enkno3(xkota2) + enkno2(xkota3) + enkno1(xkota4) + '-' +
+                enkno3(xdriv11) + enkno1(xdriv12) + enkno4(xdriv13) + enkno2(xdriv14) + '-' +
+                enkno2(xdriv21) + enkno4(xdriv22) + enkno1(xdriv23) + enkno3(xdriv24);
+
+        
+            return xregister
+        }
+
+        document.getElementById('crack').onclick = function(){
+            let val = document.getElementById('sn').value
+            let decode = decodeSerialNumber(val)
+            document.getElementById('res').innerHTML = "Result: " + decode
+        }
+		
+	</script>
+</body>
+
+</html>
