@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Videotron by PixelLabs</title>
+    <link rel="shortcut icon" href="fav.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <br>
+    <div class="container">
+        <center>
+            <img src="PixelLabs2.jpg" alt="" width="300px">
+            <br>
+            <br>
+        </center>
+
+        <div id="cardHitung">
+        <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <center>
+                                <h5>Kalkulator Videotron by PixelLabs</h5>
+                                <hr>
+                            </center>
+                            <label>Tipe Videotron</label>
+                            <select id="tipe" class="form-control">
+                                <option value="ip25" selected>INDOOR P2.5</option>
+                                <option value="ip4">INDOOR P4</option>
+                            </select>
+
+                            <br>
+
+                            <label>Lebar (dalam meter)</label>
+                            <input id="lebar" type="number" class="form-control" placeholder="Lebar Videotron (contoh 3,5)">
+
+                            <br>
+
+                            <label>Tinggi (dalam meter)</label>
+                            <input id="tinggi" type="number" class="form-control" placeholder="Tinggi Videotron (contoh 2)">
+                            
+                            <br>
+
+                            <button id="hitung" class="btn btn-success w-100">Hitung</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <br>
+        </div>
+
+        <div id="cardHasil">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <center>
+                                <h5>Hasil</h5>
+                                <hr>
+                            </center>
+                            <table class="table table-bordered">
+                                <tbody>
+                                  <tr>
+                                    <th>Lebar</th>
+                                    <th>:</th>
+                                    <td id="l"></td>
+                                  </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                      <th>Tinggi</th>
+                                      <th>:</th>
+                                      <td id="t"></td>
+                                    </tr>
+                                  </tbody>
+                                  <tbody>
+                                    <tr>
+                                      <th>Luas</th>
+                                      <th>:</th>
+                                      <td id="luas"></td>
+                                    </tr>
+                                  </tbody>
+                                  <tbody>
+                                    <tr>
+                                      <th>Harga /m2</th>
+                                      <th>:</th>
+                                      <td id="harga"></td>
+                                    </tr>
+                                  </tbody>
+                                  <tbody>
+                                    <tr>
+                                      <th>Total</th>
+                                      <th>:</th>
+                                      <td id="total"></td>
+                                    </tr>
+                                  </tbody>
+                            </table>
+                            <br>
+                            <b>*Dilakukan pembulatan ukuran menyesuaikan ukuran modul LED</b>
+                            <br>
+                            <b>*Harga belum termasuk diskon</b>
+                            <br>
+                            <br>
+                            <button id="pesan" class="btn btn-success w-100">Pesan via Whatsapp</button>
+                            <br>
+                            <br>
+                            <button id="ubahUkuran" class="btn btn-danger w-100">Ubah Ukuran</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+
+        $(document).ready(function() {
+            $("#cardHasil").hide();
+
+            $('#hitung').click(function() {
+                $("#cardHitung").hide();
+                $("#cardHasil").show();
+                let tipe = $('#tipe').val();
+                let lebar = parseFloat($('#lebar').val());
+                let tinggi = parseFloat($('#tinggi').val());
+
+                lebar = parseFloat(lebar * 100)
+                tinggi = parseFloat(tinggi * 100)
+                let hargaP25 = parseFloat("13000000")
+                let hargaP4 = parseFloat("11000000")
+
+                let bulatkanLebar = bulatkanKeKelipatan32(lebar) / 100
+                let bulatkanTinggi = bulatkanKeKelipatan16(tinggi) / 100
+
+                let hargaFinal
+                if(tipe == "ip25"){
+                    hargaFinal = (bulatkanLebar * bulatkanTinggi) * hargaP25
+                    $('#harga').text(formatRupiah(hargaP25))
+                }else{
+                    hargaFinal = (bulatkanLebar * bulatkanTinggi) * hargaP4
+                    $('#harga').text(formatRupiah(hargaP4))
+                }
+
+                $('#l').text(bulatkanLebar * 100 + " cm")
+                $('#t').text(bulatkanTinggi * 100 + " cm")
+                $('#luas').text(bulatkanLebar * bulatkanTinggi + " m2")
+                $('#total').text(formatRupiah(hargaFinal))
+            });
+
+            $('#ubahUkuran').click(function() {
+                $("#cardHasil").hide();
+                $("#cardHitung").show();
+            });
+
+            $('#pesan').click(function() {
+                let text = "Saya ingin memesan videotron tipe"
+
+                let tipe = $('#tipe').val();
+                let lebar = parseFloat($('#lebar').val());
+                let tinggi = parseFloat($('#tinggi').val());
+
+                lebar = parseFloat(lebar * 100)
+                tinggi = parseFloat(tinggi * 100)
+                let hargaP25 = parseFloat("13000000")
+                let hargaP4 = parseFloat("11000000")
+
+                let bulatkanLebar = bulatkanKeKelipatan32(lebar) / 100
+                let bulatkanTinggi = bulatkanKeKelipatan16(tinggi) / 100
+
+                let hargaFinal
+                if(tipe == "ip25"){
+                    hargaFinal = (bulatkanLebar * bulatkanTinggi) * hargaP25
+                    text += " P2.5 "
+                }else{
+                    hargaFinal = (bulatkanLebar * bulatkanTinggi) * hargaP4
+                    text += " P4 "
+                }
+
+                text += "dengan ukuran \n" + (bulatkanLebar * 100) + " cm" + " x " + (bulatkanTinggi * 100) + " cm"
+                window.location.href = "https://wa.me/6287777660170?text=" + encodeURI(text);
+
+            });
+            
+        });
+
+        function bulatkanKeKelipatan32(bilangan) {
+            return Math.round(bilangan / 32) * 32;
+        }
+
+        function bulatkanKeKelipatan16(bilangan) {
+            return Math.round(bilangan / 16) * 16;
+        }
+
+        function formatRupiah(angka) {
+            var rupiah = '';
+            angka = angka.toString().replace(/\D/g, '');
+
+            while (angka.length > 3) {
+                rupiah = '.' + angka.substr(-3) + rupiah;
+                angka = angka.slice(0, -3);
+            }
+            return 'Rp ' + angka + rupiah;
+        }
+
+
+    </script>
+</body>
+</html>
